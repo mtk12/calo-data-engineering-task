@@ -1,9 +1,11 @@
 import argparse
 import gzip
 import os
+
 import pandas as pd
+
 from parser import parse_logs, parse_balance_sync_message, parse_transaction
-from analysis import analyze_user_activity, generate_visualizations, create_consolidated_report
+from user_analysis import analyze_all_users
 
 
 def generate_transaction_data(df):
@@ -34,7 +36,7 @@ def generate_error_data(df):
 def main(input_dir: str, output_dir: str):
     # Create output directory if it doesn't exist
     os.makedirs(output_dir, exist_ok=True)
-    
+
     dfs = []
 
     for dir_path, dir_names, file_names in os.walk(input_dir):
@@ -58,43 +60,8 @@ def main(input_dir: str, output_dir: str):
 
     parsed_df = generate_transaction_data(all_data)
     error_df = generate_error_data(all_data[all_data['log_level'] == 'ERROR'])
-    
-    print(f"Parsed transaction data shape: {parsed_df.shape}")
-    print(f"Error data shape: {error_df.shape}")
-    
-    # Save parsed data
-    parsed_df.to_csv(f'{output_dir}/parsed_transactions.csv', index=False)
-    error_df.to_csv(f'{output_dir}/error_data.csv', index=False)
-    
-    print("Saved parsed data to CSV files")
-    
-    # # Perform comprehensive analysis
-    # if not parsed_df.empty:
-    #     print("\n=== Starting Comprehensive Analysis ===")
-        
-    #     # Analyze user activity (will pick the most active user)
-    #     analysis_results = analyze_user_activity(parsed_df, error_df)
-        
-    #     # Generate visualizations
-    #     generate_visualizations(parsed_df, error_df, analysis_results['user_id'], output_dir)
-        
-    #     # Create consolidated report
-    #     create_consolidated_report(analysis_results, output_dir)
-        
-    #     # Print summary
-    #     print(f"\n=== Analysis Summary for User: {analysis_results['user_id']} ===")
-    #     print(f"Total Transactions: {analysis_results['transaction_summary'].get('total_transactions', 0)}")
-    #     print(f"Total Errors: {analysis_results['error_analysis'].get('total_errors', 0)}")
-    #     print(f"Anomalies Detected: {analysis_results['anomalies']['total_anomalies']}")
-    #     print(f"Recommendations: {len(analysis_results['recommendations'])}")
-        
-    #     if analysis_results['balance_analysis']:
-    #         print(f"Final Balance: {analysis_results['balance_analysis'].get('final_balance', 0)}")
-    #         print(f"Net Balance Change: {analysis_results['balance_analysis'].get('net_change', 0)}")
-        
-    #     print(f"\nReports generated in: {output_dir}")
-    # else:
-    #     print("No transaction data found for analysis")
+
+    analyze_all_users(error_df, parsed_df)
 
 
 if __name__ == "__main__":
