@@ -3,8 +3,6 @@ import warnings
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from reports.excel_report import insert_chart_to_excel
-
 warnings.filterwarnings('ignore')
 
 # Set style for better looking charts
@@ -14,7 +12,7 @@ sns.set_palette("husl")
 
 def transaction_count_over_period(parsed_df):
     """Transaction count over the period bar chart"""
-    plt.figure(figsize=(7, 4))
+    plt.figure(figsize=(15, 8))
 
     # Group by date and count transactions
     daily_transactions = parsed_df.groupby(parsed_df['timestamp'].dt.date).size()
@@ -27,13 +25,11 @@ def transaction_count_over_period(parsed_df):
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
     plt.savefig('output_reports/transaction_count_over_period.png', dpi=300, bbox_inches='tight')
-    insert_chart_to_excel("output_reports/", "analysis.xlsx", "Transaction Analysis",
-                          "output_reports/transaction_count_over_period.png", "B2")
 
 
 def credit_transactions_over_period(parsed_df):
     """Credit transactions over the period"""
-    plt.figure(figsize=(7, 4))
+    plt.figure(figsize=(15, 8))
 
     # Filter credit transactions
     credit_df = parsed_df[parsed_df['type'] == 'CREDIT']
@@ -47,13 +43,11 @@ def credit_transactions_over_period(parsed_df):
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
     plt.savefig('output_reports/credit_transactions_over_period.png', dpi=300, bbox_inches='tight')
-    insert_chart_to_excel("output_reports/", "analysis.xlsx", "Transaction Analysis",
-                          "output_reports/credit_transactions_over_period.png", "B60")
 
 
 def debit_transactions_over_period(parsed_df):
     """Debit transactions over the period"""
-    plt.figure(figsize=(7, 4))
+    plt.figure(figsize=(15, 8))
 
     # Filter debit transactions
     debit_df = parsed_df[parsed_df['type'] == 'DEBIT']
@@ -67,13 +61,11 @@ def debit_transactions_over_period(parsed_df):
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
     plt.savefig('output_reports/debit_transactions_over_period.png', dpi=300, bbox_inches='tight')
-    insert_chart_to_excel("output_reports/", "analysis.xlsx", "Transaction Analysis",
-                          "output_reports/debit_transactions_over_period.png", "B118")
 
 
 def transactions_by_action_over_period(parsed_df):
     """Transaction count by action"""
-    plt.figure(figsize=(7, 4))
+    plt.figure(figsize=(12, 8))
 
     # Get top 15 actions by count
     action_counts = parsed_df['action'].value_counts().head(15)
@@ -87,13 +79,11 @@ def transactions_by_action_over_period(parsed_df):
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
     plt.savefig('output_reports/transactions_by_action_over_period.png', dpi=300, bbox_inches='tight')
-    insert_chart_to_excel("output_reports/", "analysis.xlsx", "Transaction Analysis",
-                          "output_reports/transactions_by_action_over_period.png", "B176")
 
 
 def top_users_transacting(parsed_df):
     """Top users transacting"""
-    plt.figure(figsize=(7, 4))
+    plt.figure(figsize=(12, 8))
 
     # Get top 10 users by transaction count
     top_users = parsed_df['userId'].value_counts().head(10)
@@ -106,13 +96,11 @@ def top_users_transacting(parsed_df):
     plt.grid(True, axis='y', alpha=0.3)
     plt.tight_layout()
     plt.savefig('output_reports/top_users_transacting.png', dpi=300, bbox_inches='tight')
-    insert_chart_to_excel("output_reports/", "analysis.xlsx", "Transaction Analysis",
-                          "output_reports/top_users_transacting.png", "B234")
 
 
 def error_transactions_over_period(error_df):
     """Error transactions over the period with anomaly detection"""
-    plt.figure(figsize=(7, 4))
+    plt.figure(figsize=(15, 8))
 
     # Group by date and count errors
     daily_errors = error_df.groupby(error_df['timestamp'].dt.date).size()
@@ -143,13 +131,11 @@ def error_transactions_over_period(error_df):
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
     plt.savefig('output_reports/error_transactions_over_period.png', dpi=300, bbox_inches='tight')
-    insert_chart_to_excel("output_reports/", "analysis.xlsx", "Error Analysis",
-                          "output_reports/error_transactions_over_period.png", "B2")
 
 
 def error_transactions_by_action(error_df, parsed_df, top_n=10):
     """Top Error Transactions by Action"""
-    plt.figure(figsize=(7, 4))
+    plt.figure(figsize=(12, 8))
 
     # Merge error data with parsed transactions to get action information
     error_with_action = error_df.merge(
@@ -171,13 +157,11 @@ def error_transactions_by_action(error_df, parsed_df, top_n=10):
     plt.xticks(rotation=45, ha='right')  # Rotate x-axis labels for better readability
     plt.tight_layout()
     plt.savefig(f'output_reports/top_{top_n}_error_transactions_by_action.png', dpi=300, bbox_inches='tight')
-    insert_chart_to_excel("output_reports/", "analysis.xlsx", "Error Analysis",
-                          f"output_reports/top_{top_n}_error_transactions_by_action.png", "B60")
 
 
 def top_users_error_transactions(error_df):
     """Top users with error transactions"""
-    plt.figure(figsize=(7, 4))
+    plt.figure(figsize=(12, 8))
 
     # Get top 20 users by error count
     top_error_users = error_df['userId'].value_counts().head(20)
@@ -190,13 +174,11 @@ def top_users_error_transactions(error_df):
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
     plt.savefig('output_reports/top_users_error_transactions.png', dpi=300, bbox_inches='tight')
-    insert_chart_to_excel("output_reports/", "analysis.xlsx", "Error Analysis",
-                          "output_reports/top_users_error_transactions.png", "B118")
 
 
 def total_debit_credit_loss(user_analysis_df):
     """Total overall debit and credit loss"""
-    plt.figure(figsize=(7, 4))
+    plt.figure(figsize=(12, 8))
 
     # Calculate totals
     total_debit_loss = user_analysis_df['Total_debit_loss'].sum()
@@ -219,13 +201,11 @@ def total_debit_credit_loss(user_analysis_df):
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
     plt.savefig('output_reports/total_debit_credit_loss.png', dpi=300, bbox_inches='tight')
-    insert_chart_to_excel("output_reports/", "analysis.xlsx", "Error Analysis",
-                          "output_reports/total_debit_credit_loss.png", "B176")
 
 
 def first_error_reason_count(user_analysis_df):
     """First error transaction reason count (ignore nan - nan)"""
-    plt.figure(figsize=(7, 4))
+    plt.figure(figsize=(12, 8))
 
     # Filter out 'nan - nan' and count reasons
     reasons = user_analysis_df[user_analysis_df['First_error_transaction_reason'] != 'nan - nan']
@@ -240,8 +220,6 @@ def first_error_reason_count(user_analysis_df):
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
     plt.savefig('output_reports/first_error_reason_count.png', dpi=300, bbox_inches='tight')
-    insert_chart_to_excel("output_reports/", "analysis.xlsx", "Error Analysis",
-                          "output_reports/total_debit_credit_loss.png", "B234")
 
 
 def run_complete_analysis(parsed_df, error_df, user_analysis_df):
