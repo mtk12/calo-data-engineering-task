@@ -6,6 +6,7 @@ import pandas as pd
 
 from analysis import run_complete_analysis
 from parser import parse_logs, parse_balance_sync_message, parse_transaction
+from reports.excel_report import generate_excel
 from user_analysis import analyze_all_users
 
 
@@ -66,6 +67,7 @@ def main(input_dir: str, output_dir: str):
 
     user_analysis_df = analyze_all_users(error_df, parsed_df)
     run_complete_analysis(parsed_df, error_df, user_analysis_df)
+    generate_excel(parsed_df, error_df, user_analysis_df, "analysis.xlsx", output_dir)
 
 
 if __name__ == "__main__":
