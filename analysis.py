@@ -12,7 +12,7 @@ plt.style.use('seaborn-v0_8')
 sns.set_palette("husl")
 
 
-def transaction_count_over_period(parsed_df):
+def transaction_count_over_period(parsed_df, output_dir, output_file_name):
     """Transaction count over the period bar chart"""
     plt.figure(figsize=(7, 4))
 
@@ -26,12 +26,12 @@ def transaction_count_over_period(parsed_df):
     plt.xticks(rotation=45)
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
-    plt.savefig('output_reports/transaction_count_over_period.png', dpi=300, bbox_inches='tight')
-    insert_chart_to_excel("output_reports/", "analysis.xlsx", "Transaction Analysis",
+    plt.savefig(output_dir + '/transaction_count_over_period.png', dpi=300, bbox_inches='tight')
+    insert_chart_to_excel(output_dir, output_file_name, "Transaction Analysis",
                           "output_reports/transaction_count_over_period.png", "B2")
 
 
-def credit_transactions_over_period(parsed_df):
+def credit_transactions_over_period(parsed_df, output_dir, output_file_name):
     """Credit transactions over the period"""
     plt.figure(figsize=(7, 4))
 
@@ -46,12 +46,12 @@ def credit_transactions_over_period(parsed_df):
     plt.xticks(rotation=45)
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
-    plt.savefig('output_reports/credit_transactions_over_period.png', dpi=300, bbox_inches='tight')
-    insert_chart_to_excel("output_reports/", "analysis.xlsx", "Transaction Analysis",
+    plt.savefig(output_dir + '/credit_transactions_over_period.png', dpi=300, bbox_inches='tight')
+    insert_chart_to_excel(output_dir, output_file_name, "Transaction Analysis",
                           "output_reports/credit_transactions_over_period.png", "B60")
 
 
-def debit_transactions_over_period(parsed_df):
+def debit_transactions_over_period(parsed_df, output_dir, output_file_name):
     """Debit transactions over the period"""
     plt.figure(figsize=(7, 4))
 
@@ -66,12 +66,12 @@ def debit_transactions_over_period(parsed_df):
     plt.xticks(rotation=45)
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
-    plt.savefig('output_reports/debit_transactions_over_period.png', dpi=300, bbox_inches='tight')
-    insert_chart_to_excel("output_reports/", "analysis.xlsx", "Transaction Analysis",
+    plt.savefig(output_dir + '/debit_transactions_over_period.png', dpi=300, bbox_inches='tight')
+    insert_chart_to_excel(output_dir, output_file_name, "Transaction Analysis",
                           "output_reports/debit_transactions_over_period.png", "B118")
 
 
-def transactions_by_action_over_period(parsed_df):
+def transactions_by_action_over_period(parsed_df, output_dir, output_file_name):
     """Transaction count by action"""
     plt.figure(figsize=(7, 4))
 
@@ -86,12 +86,12 @@ def transactions_by_action_over_period(parsed_df):
     plt.ylabel('Action', fontsize=12)
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
-    plt.savefig('output_reports/transactions_by_action_over_period.png', dpi=300, bbox_inches='tight')
-    insert_chart_to_excel("output_reports/", "analysis.xlsx", "Transaction Analysis",
+    plt.savefig(output_dir + '/transactions_by_action_over_period.png', dpi=300, bbox_inches='tight')
+    insert_chart_to_excel(output_dir, output_file_name, "Transaction Analysis",
                           "output_reports/transactions_by_action_over_period.png", "B176")
 
 
-def top_users_transacting(parsed_df):
+def top_users_transacting(parsed_df, output_dir, output_file_name):
     """Top users transacting"""
     plt.figure(figsize=(7, 4))
 
@@ -105,12 +105,12 @@ def top_users_transacting(parsed_df):
     plt.xlabel('Users', fontsize=12)
     plt.grid(True, axis='y', alpha=0.3)
     plt.tight_layout()
-    plt.savefig('output_reports/top_users_transacting.png', dpi=300, bbox_inches='tight')
-    insert_chart_to_excel("output_reports/", "analysis.xlsx", "Transaction Analysis",
+    plt.savefig(output_dir + '/top_users_transacting.png', dpi=300, bbox_inches='tight')
+    insert_chart_to_excel(output_dir, output_file_name, "Transaction Analysis",
                           "output_reports/top_users_transacting.png", "B234")
 
 
-def error_transactions_over_period(error_df):
+def error_transactions_over_period(error_df, output_dir, output_file_name):
     """Error transactions over the period with anomaly detection"""
     plt.figure(figsize=(7, 4))
 
@@ -142,12 +142,12 @@ def error_transactions_over_period(error_df):
     plt.legend()
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
-    plt.savefig('output_reports/error_transactions_over_period.png', dpi=300, bbox_inches='tight')
-    insert_chart_to_excel("output_reports/", "analysis.xlsx", "Error Analysis",
+    plt.savefig(output_dir + '/error_transactions_over_period.png', dpi=300, bbox_inches='tight')
+    insert_chart_to_excel(output_dir, output_file_name, "Error Analysis",
                           "output_reports/error_transactions_over_period.png", "B2")
 
 
-def error_transactions_by_action(error_df, parsed_df, top_n=10):
+def error_transactions_by_action(error_df, parsed_df, output_dir, output_file_name, top_n=10):
     """Top Error Transactions by Action"""
     plt.figure(figsize=(7, 4))
 
@@ -170,12 +170,12 @@ def error_transactions_by_action(error_df, parsed_df, top_n=10):
     plt.ylabel('Number of Errors', fontsize=12)
     plt.xticks(rotation=45, ha='right')  # Rotate x-axis labels for better readability
     plt.tight_layout()
-    plt.savefig(f'output_reports/top_{top_n}_error_transactions_by_action.png', dpi=300, bbox_inches='tight')
-    insert_chart_to_excel("output_reports/", "analysis.xlsx", "Error Analysis",
+    plt.savefig(output_dir + f'/top_{top_n}_error_transactions_by_action.png', dpi=300, bbox_inches='tight')
+    insert_chart_to_excel(output_dir, output_file_name, "Error Analysis",
                           f"output_reports/top_{top_n}_error_transactions_by_action.png", "B60")
 
 
-def top_users_error_transactions(error_df):
+def top_users_error_transactions(error_df, output_dir, output_file_name):
     """Top users with error transactions"""
     plt.figure(figsize=(7, 4))
 
@@ -189,12 +189,12 @@ def top_users_error_transactions(error_df):
     plt.ylabel('Users', fontsize=12)
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
-    plt.savefig('output_reports/top_users_error_transactions.png', dpi=300, bbox_inches='tight')
-    insert_chart_to_excel("output_reports/", "analysis.xlsx", "Error Analysis",
+    plt.savefig(output_dir + '/top_users_error_transactions.png', dpi=300, bbox_inches='tight')
+    insert_chart_to_excel(output_dir, output_file_name, "Error Analysis",
                           "output_reports/top_users_error_transactions.png", "B118")
 
 
-def total_debit_credit_loss(user_analysis_df):
+def total_debit_credit_loss(user_analysis_df, output_dir, output_file_name):
     """Total overall debit and credit loss"""
     plt.figure(figsize=(7, 4))
 
@@ -218,12 +218,12 @@ def total_debit_credit_loss(user_analysis_df):
     plt.ylabel('Loss Amount', fontsize=12)
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
-    plt.savefig('output_reports/total_debit_credit_loss.png', dpi=300, bbox_inches='tight')
-    insert_chart_to_excel("output_reports/", "analysis.xlsx", "Error Analysis",
+    plt.savefig(output_dir + '/total_debit_credit_loss.png', dpi=300, bbox_inches='tight')
+    insert_chart_to_excel(output_dir, output_file_name, "Error Analysis",
                           "output_reports/total_debit_credit_loss.png", "B176")
 
 
-def first_error_reason_count(user_analysis_df):
+def first_error_reason_count(user_analysis_df, output_dir, output_file_name):
     """First error transaction reason count (ignore nan - nan)"""
     plt.figure(figsize=(7, 4))
 
@@ -239,29 +239,29 @@ def first_error_reason_count(user_analysis_df):
     plt.ylabel('Error Reason', fontsize=12)
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
-    plt.savefig('output_reports/first_error_reason_count.png', dpi=300, bbox_inches='tight')
-    insert_chart_to_excel("output_reports/", "analysis.xlsx", "Error Analysis",
+    plt.savefig(output_dir + '/first_error_reason_count.png', dpi=300, bbox_inches='tight')
+    insert_chart_to_excel(output_dir, output_file_name, "Error Analysis",
                           "output_reports/total_debit_credit_loss.png", "B234")
 
 
-def run_complete_analysis(parsed_df, error_df, user_analysis_df):
+def run_complete_analysis(parsed_df, error_df, user_analysis_df, output_dir, output_file_name):
     """Run all analysis functions"""
     print("=== Starting Complete Dataset Analysis ===\n")
     print("\n=== Transaction Analysis ===")
-    transaction_count_over_period(parsed_df)
-    credit_transactions_over_period(parsed_df)
-    debit_transactions_over_period(parsed_df)
-    transactions_by_action_over_period(parsed_df)
-    top_users_transacting(parsed_df)
+    transaction_count_over_period(parsed_df, output_dir, output_file_name)
+    credit_transactions_over_period(parsed_df, output_dir, output_file_name)
+    debit_transactions_over_period(parsed_df, output_dir, output_file_name)
+    transactions_by_action_over_period(parsed_df, output_dir, output_file_name)
+    top_users_transacting(parsed_df, output_dir, output_file_name)
 
     print("\n=== Error Analysis ===")
-    error_transactions_over_period(error_df)
-    error_transactions_by_action(error_df, parsed_df)
-    top_users_error_transactions(error_df)
+    error_transactions_over_period(error_df, output_dir, output_file_name)
+    error_transactions_by_action(error_df, parsed_df, output_dir, output_file_name)
+    top_users_error_transactions(error_df, output_dir, output_file_name)
 
     print("\n=== Loss Analysis ===")
-    total_debit_credit_loss(user_analysis_df)
-    first_error_reason_count(user_analysis_df)
+    total_debit_credit_loss(user_analysis_df, output_dir, output_file_name)
+    first_error_reason_count(user_analysis_df, output_dir, output_file_name)
 
     print("\n=== Analysis Complete ===")
     print("All charts have been saved to output_reports/ directory")

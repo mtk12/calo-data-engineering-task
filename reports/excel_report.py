@@ -26,8 +26,9 @@ def generate_excel(parsed_df, error_df, analysis_df, output_excel_file_name, out
 
 
 def insert_chart_to_excel(output_excel_file_path, output_excel_file_name, sheet_name, image_path, cell):
-    if os.path.exists(output_excel_file_path + output_excel_file_name):
-        workbook = load_workbook(output_excel_file_path + output_excel_file_name)
+    full_path = os.path.join(output_excel_file_path, output_excel_file_name)
+    if os.path.exists(full_path):
+        workbook = load_workbook(full_path)
     else:
         workbook = Workbook()
 
@@ -38,4 +39,4 @@ def insert_chart_to_excel(output_excel_file_path, output_excel_file_name, sheet_
 
     img = Image(image_path)
     worksheet.add_image(img, cell)
-    workbook.save(output_excel_file_path + output_excel_file_name)
+    workbook.save(full_path)
