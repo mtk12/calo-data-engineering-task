@@ -65,7 +65,7 @@ def main(input_dir: str, output_dir: str):
     parsed_df = generate_transaction_data(all_data)
     error_df = generate_error_data(all_data[all_data['log_level'] == 'ERROR'])
 
-    user_analysis_df = analyze_all_users(error_df, parsed_df, output_dir, "analysis.xlsx")
+    user_analysis_df = analyze_all_users(error_df, parsed_df)
     generate_excel(parsed_df, error_df, user_analysis_df, "analysis.xlsx", output_dir)
     run_complete_analysis(parsed_df, error_df, user_analysis_df, output_dir, "analysis.xlsx")
 

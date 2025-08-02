@@ -102,7 +102,7 @@ def analyze_user_data(user_id, error_data, parsed_transactions):
     return analysis_result
 
 
-def analyze_all_users(error_df, parsed_df, output_dir, output_file_name):
+def analyze_all_users(error_df, parsed_df):
     unique_users = error_df['userId'].unique()
     print(f"Total unique users in error data: {len(unique_users)}")
     all_results = []
@@ -128,9 +128,5 @@ def analyze_all_users(error_df, parsed_df, output_dir, output_file_name):
             })
 
     result_df = pd.DataFrame(all_results)
-    output_file = output_dir + '/' + output_file_name
-    result_df.to_csv(output_file, index=False)
-
     print(f"\nAnalysis completed for all {len(unique_users)} users")
-    print(f"Results saved to: {output_file}")
     return result_df

@@ -28,7 +28,7 @@ def transaction_count_over_period(parsed_df, output_dir, output_file_name):
     plt.tight_layout()
     plt.savefig(output_dir + '/transaction_count_over_period.png', dpi=300, bbox_inches='tight')
     insert_chart_to_excel(output_dir, output_file_name, "Transaction Analysis",
-                          "output_reports/transaction_count_over_period.png", "B2")
+                          output_dir + "/transaction_count_over_period.png", "B2")
 
 
 def credit_transactions_over_period(parsed_df, output_dir, output_file_name):
@@ -48,7 +48,7 @@ def credit_transactions_over_period(parsed_df, output_dir, output_file_name):
     plt.tight_layout()
     plt.savefig(output_dir + '/credit_transactions_over_period.png', dpi=300, bbox_inches='tight')
     insert_chart_to_excel(output_dir, output_file_name, "Transaction Analysis",
-                          "output_reports/credit_transactions_over_period.png", "B60")
+                          output_dir + "/credit_transactions_over_period.png", "B60")
 
 
 def debit_transactions_over_period(parsed_df, output_dir, output_file_name):
@@ -68,7 +68,7 @@ def debit_transactions_over_period(parsed_df, output_dir, output_file_name):
     plt.tight_layout()
     plt.savefig(output_dir + '/debit_transactions_over_period.png', dpi=300, bbox_inches='tight')
     insert_chart_to_excel(output_dir, output_file_name, "Transaction Analysis",
-                          "output_reports/debit_transactions_over_period.png", "B118")
+                          output_dir + "/debit_transactions_over_period.png", "B118")
 
 
 def transactions_by_action_over_period(parsed_df, output_dir, output_file_name):
@@ -88,7 +88,7 @@ def transactions_by_action_over_period(parsed_df, output_dir, output_file_name):
     plt.tight_layout()
     plt.savefig(output_dir + '/transactions_by_action_over_period.png', dpi=300, bbox_inches='tight')
     insert_chart_to_excel(output_dir, output_file_name, "Transaction Analysis",
-                          "output_reports/transactions_by_action_over_period.png", "B176")
+                          output_dir + "/transactions_by_action_over_period.png", "B176")
 
 
 def top_users_transacting(parsed_df, output_dir, output_file_name):
@@ -107,7 +107,7 @@ def top_users_transacting(parsed_df, output_dir, output_file_name):
     plt.tight_layout()
     plt.savefig(output_dir + '/top_users_transacting.png', dpi=300, bbox_inches='tight')
     insert_chart_to_excel(output_dir, output_file_name, "Transaction Analysis",
-                          "output_reports/top_users_transacting.png", "B234")
+                          output_dir + "/top_users_transacting.png", "B234")
 
 
 def error_transactions_over_period(error_df, output_dir, output_file_name):
@@ -144,7 +144,7 @@ def error_transactions_over_period(error_df, output_dir, output_file_name):
     plt.tight_layout()
     plt.savefig(output_dir + '/error_transactions_over_period.png', dpi=300, bbox_inches='tight')
     insert_chart_to_excel(output_dir, output_file_name, "Error Analysis",
-                          "output_reports/error_transactions_over_period.png", "B2")
+                          output_dir + "/error_transactions_over_period.png", "B2")
 
 
 def error_transactions_by_action(error_df, parsed_df, output_dir, output_file_name, top_n=10):
@@ -172,7 +172,7 @@ def error_transactions_by_action(error_df, parsed_df, output_dir, output_file_na
     plt.tight_layout()
     plt.savefig(output_dir + f'/top_{top_n}_error_transactions_by_action.png', dpi=300, bbox_inches='tight')
     insert_chart_to_excel(output_dir, output_file_name, "Error Analysis",
-                          f"output_reports/top_{top_n}_error_transactions_by_action.png", "B60")
+                          output_dir + f"/top_{top_n}_error_transactions_by_action.png", "B60")
 
 
 def top_users_error_transactions(error_df, output_dir, output_file_name):
@@ -191,7 +191,7 @@ def top_users_error_transactions(error_df, output_dir, output_file_name):
     plt.tight_layout()
     plt.savefig(output_dir + '/top_users_error_transactions.png', dpi=300, bbox_inches='tight')
     insert_chart_to_excel(output_dir, output_file_name, "Error Analysis",
-                          "output_reports/top_users_error_transactions.png", "B118")
+                          output_dir + "/top_users_error_transactions.png", "B118")
 
 
 def total_debit_credit_loss(user_analysis_df, output_dir, output_file_name):
@@ -220,7 +220,7 @@ def total_debit_credit_loss(user_analysis_df, output_dir, output_file_name):
     plt.tight_layout()
     plt.savefig(output_dir + '/total_debit_credit_loss.png', dpi=300, bbox_inches='tight')
     insert_chart_to_excel(output_dir, output_file_name, "Error Analysis",
-                          "output_reports/total_debit_credit_loss.png", "B176")
+                          output_dir + "/total_debit_credit_loss.png", "B176")
 
 
 def first_error_reason_count(user_analysis_df, output_dir, output_file_name):
@@ -241,7 +241,7 @@ def first_error_reason_count(user_analysis_df, output_dir, output_file_name):
     plt.tight_layout()
     plt.savefig(output_dir + '/first_error_reason_count.png', dpi=300, bbox_inches='tight')
     insert_chart_to_excel(output_dir, output_file_name, "Error Analysis",
-                          "output_reports/total_debit_credit_loss.png", "B234")
+                          output_dir + "/total_debit_credit_loss.png", "B234")
 
 
 def run_complete_analysis(parsed_df, error_df, user_analysis_df, output_dir, output_file_name):
