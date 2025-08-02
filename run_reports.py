@@ -4,6 +4,7 @@ import os
 
 import pandas as pd
 
+from analysis import run_complete_analysis
 from parser import parse_logs, parse_balance_sync_message, parse_transaction
 from user_analysis import analyze_all_users
 
@@ -18,6 +19,7 @@ def generate_transaction_data(df):
             parsed_message['timestamp'] = row['timestamp']
             records.append(parsed_message)
     parsed_df = pd.DataFrame(records)
+    parsed_df['timestamp'] = pd.to_datetime(parsed_df['timestamp'])
     return parsed_df
 
 
@@ -30,6 +32,7 @@ def generate_error_data(df):
             parsed_message['timestamp'] = row['timestamp']
             records.append(parsed_message)
     error_df = pd.DataFrame(records)
+    error_df['timestamp'] = pd.to_datetime(error_df['timestamp'])
     return error_df
 
 
@@ -61,7 +64,8 @@ def main(input_dir: str, output_dir: str):
     parsed_df = generate_transaction_data(all_data)
     error_df = generate_error_data(all_data[all_data['log_level'] == 'ERROR'])
 
-    analyze_all_users(error_df, parsed_df)
+    user_analysis_df = analyze_all_users(error_df, parsed_df)
+    run_complete_analysis(parsed_df, error_df, user_analysis_df)
 
 
 if __name__ == "__main__":
